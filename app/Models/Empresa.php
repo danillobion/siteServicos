@@ -18,10 +18,15 @@ class Empresa extends Model
         'id','nome',
     ];
 
+    protected $hidden = ['pivot'];
+
     public function usuarios() {
         return $this->belongsTo("\App\User");
     }
     public function linhas() {
-        return $this->hasMany("\App\Linha");
+        return $this->hasMany(Linha::class);
+    }
+    public function cidades() {
+        return $this->hasMany(Cidade::class);
     }
 }
