@@ -7,7 +7,7 @@ use App\Http\Controllers\LinhaController;
 use App\Http\Controllers\ParadaController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\LinhaEParadaController;
-use App\Http\Controllers\ApiController;
+// use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +62,4 @@ Route::group(['middleware' => 'type'], function () {
 });
 
 //API
-Route::get('home/api/dados', [ApiController::class, 'transporteColetivo'])->name('api/dados');
+// Route::get('home/api/dados', [ApiController::class, 'transporteColetivo'])->name('api/dados');
