@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ApiRequest;
+use App\Models\Cidade;
 use Illuminate\Http\Request;
 use App\Models\Empresa;
 use App\Models\Linha;
 use App\Models\Parada;
 use App\Models\Horario;
 use App\Models\Linhaeparada;
+use Exception;
 
 class ApiController extends Controller
 {
@@ -22,4 +25,29 @@ class ApiController extends Controller
         $body = ['dados'=>$dados, 'status'=>true, 'cidade'=>'Garanhuns/PE', 'dataAtualizacao'=>date("d.m.y"), 'versaoDoSistema' => "1.0"];
         echo json_encode($body);
     }
+
+    public function getAll(ApiRequest $request){
+        try{
+            $dados = $request->validated();
+
+            $cidade = Cidade::with(
+                'empresas', 
+                'empresas.linhas', 
+                'empresas.linhas.paradas', 
+                'empresas.linhas.horarios'
+            )->find($dados['cidade_id']);
+
+            return response(array(
+                'success' => true,
+                'dados' => $cidade
+            ), 200);
+
+        }catch(Exception $err){
+            return response(array(
+                'success' => false,
+                'error' => $err->getMessage()
+            ), 400);
+        }
+    } 
+
 }
