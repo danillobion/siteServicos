@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,9 @@ Route::get('/', function () {
 Route::prefix('paradas')->group(function () {
     Route::get('/all',  [ApiController::class, 'getAll']);
 });
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+//API
+Route::post('/dados', [ApiController::class, 'transporteColetivo']);
