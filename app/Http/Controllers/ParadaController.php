@@ -21,6 +21,7 @@ class ParadaController extends Controller
     public function salvarParada(Request $request){
         $parada = Parada::create([
             'rua' => $request['rua'],
+            'numero' => $request['numero'],
             'latitude' => $request['latitude'],
             'longitude' => $request['longitude'],
         ]);
@@ -40,6 +41,7 @@ class ParadaController extends Controller
     public function atualizarParada(Request $request){        
         $paradas = Parada::where('id', $request['parada_id'])->update([
             'rua' => $request['editar_rua_da_parada'],
+            'numero' => $request['editar_numero_da_parada'],
             'latitude' => $request['editar_latitude_da_parada'],
             'longitude' => $request['editar_longitude_da_parada'],
         ]);
@@ -50,7 +52,7 @@ class ParadaController extends Controller
     * Funcao responsavel por pegar a lista de paradas cadastradas no sistema
     */
     private function getAllParadas(){
-        $dados = Parada::orderBy('rua')->get();
+        $dados = Parada::orderBy('rua', 'DESC')->get();
         $body = ['paradas'=>$dados];
         return $body;
     }

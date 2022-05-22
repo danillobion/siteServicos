@@ -32,3 +32,10 @@ Route::prefix('paradas')->group(function () {
 
 //API
 Route::post('/dados', [ApiController::class, 'transporteColetivo']);
+//Linhas
+Route::post('/linhas', [ApiController::class, 'getTodasAsLinhas']);
+//Informacoes de uma linha especifica
+Route::post('/info/linhas', [ApiController::class, 'getInfoLinha']);
+//Outras linhas
+Route::post('/linha/paradas', [ApiController::class, 'getTodasAsLinhasDeUmaDeterminadaParada']);
+

@@ -3,17 +3,21 @@
   */
 function cadastrarParada(){
     let rua_da_parada = $("#rua_da_parada").val();
+    let numero_da_parada = $("#numero_da_parada").val();
     let latitude_da_parada = $("#latitude_da_parada").val();
     let longitude_da_parada = $("#longitude_da_parada").val();
     try {
         if(rua_da_parada == "") throw {erros:{id:"rua_da_parada", type:"error", msg: "O campo Rua é obrigatório."}}
         if(rua_da_parada.length < 3) throw {erros:{id:"rua_da_parada", type:"error", msg: "O campo Rua deve ter pelo menos 4 caracteres."}}
+        if(numero_da_parada == "") throw {erros:{id:"numero_da_parada", type:"error", msg: "O campo Número é obrigatório."}}
         if(latitude_da_parada == "") throw {erros:{id:"latitude_da_parada", type:"error", msg: "O campo Latitude não pode tá vázio."}}
         if(longitude_da_parada == "") throw {erros:{id:"longitude_da_parada", type:"error", msg: "O campo Longitude não pode tá vázio."}}
 
         let formData = new FormData();
         formData.append('rua', rua_da_parada);
+        formData.append('numero', numero_da_parada);
         formData.append('latitude', latitude_da_parada);
+        formData.append('dia', 0);
         formData.append('longitude', longitude_da_parada);
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
         salvarLinha(formData);

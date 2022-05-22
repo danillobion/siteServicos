@@ -2,6 +2,7 @@ function editarParada(parada_id){
     limparCampos();
     let formData = new FormData();
     formData.append('parada_id', parada_id);
+    formData.append('dia', 0);
     formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
     $.ajax({
         headers: {

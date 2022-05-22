@@ -41,13 +41,19 @@ class LinhaEParadaController extends Controller
     * Funcao responsavel por salvar o novo registro
     */
     public function salvarLinhaeParada(Request $request){
-        $cont = Linhaeparada::where('linha_id', $request->linha_id)->count();
-        $linhaeparadas = Linhaeparada::create([
-            'ordem' =>$cont+1, 
-            'linha_id' =>intval($request->linha_id), 
-            'parada_id' =>intval($request->parada_id)
-        ]);
-        $body = ['status'=>$linhaeparadas, "linhaeparadas" =>$this->getAllLinhaParadas($request['linha_id'])];
+        $cont = 0;
+        Linhaeparada::where('linha_id', $request->linha_id)->delete();
+
+        foreach ($_REQUEST['lista'] as $key => $value) {
+            $linhaeparadas = Linhaeparada::create([
+                    'ordem' =>$cont+1, 
+                    'linha_id' =>intval($request->linha_id), 
+                    'dia' => 0,
+                    'parada_id' =>intval($value)
+                ]);
+                $cont = $cont+1;
+        }
+        $body = ['status'=>1,"linhaeparadas" =>$this->getAllLinhaParadas($request['linha_id'])];
         return $body;
     }
     /*

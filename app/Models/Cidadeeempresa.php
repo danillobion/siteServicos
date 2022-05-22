@@ -2,23 +2,18 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cidade extends Model
+class Cidadeeempresa extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'nome','uf'
+        'cidade_id',
+        'empresa_id',
     ];
 
-    public function empresas() {
+    public function cidades() {
         return $this->belongsToMany(Empresa::class);
-    }
-
-    public function linhas() {
-        return $this->hasMany(Linha::class);
     }
 }
