@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('paradas', function (Blueprint $table) {
             $table->id();
             $table->string('rua');
+            $table->string('numero');
             $table->string('latitude');
             $table->string('longitude');
             $table->timestamps();

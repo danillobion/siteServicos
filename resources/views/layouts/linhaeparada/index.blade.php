@@ -27,7 +27,7 @@
         
         <!-- Modal adicionar-->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">{{ __('Selecionar parada') }}</h5>
@@ -39,20 +39,46 @@
                     <form id="formLinhaEParadas">
                         @csrf
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-6"">
                                 <div class="form-group">
-                                    <label for="nome_da_linha">{{ __('Nome da linha') }}</label>
-                                    <select class="form-select" aria-label="Default select example" id="select_parada" name="select_parada">
-                                      </select>
-                                    <span class="select_parada" style="color: red"></span>
+                                    <label for="pesquisarParada">Pesquisar parada</label>
+                                    <input class="form-control" type="text" id="pesquisarParada" >
                                 </div>
                             </div>
+                            <div class="col-6""></div>
+                            <div class="col-6">
+                                <table class="table table-hover  mb-0" id="dados">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col" style="width: 100%">Parada</th>
+                                        <th scope="col" style="width: 100%">Número</th>
+                                        <th scope="col"  >Ações</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody  id="tableTodasAsParadas" style="height: 100px;  overflow-y: auto; overflow-x: hidden; ">
+                                    </tbody>
+                                  </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-hover  mb-0"  id="listaDeParadasSelecionadas">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col"  style="width: 100%">Parada</th>
+                                        <th scope="col" >Número</th>
+                                        <th scope="col"  >Ações</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody  id="tableTodasAsParadasSelecionadas" style="height: 100px;  overflow-y: auto; overflow-x: hidden; ">
+                                    </tbody>
+                                  </table>
+                            </div>
                         </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('Cancelar') }}</button>
-                <button type="button" class="btn btn-success" id="botaoSalvar" onclick="cadastrarLinhaEParadas()">{{ __('Salvar') }}</button>
+                <button type="button" class="btn btn-success" id="botaoSalvar" onclick="salvarListaDeParadas()">{{ __('Salvar') }}</button>
                 </div>
             </div>
             </div>

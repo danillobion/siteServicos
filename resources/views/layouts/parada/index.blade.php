@@ -14,9 +14,10 @@
                         <thead>
                           <tr>
                             <th scope="col" style="width: 50%">Rua</th>
+                            <th scope="col" >Número</th>
                             <th scope="col" >Latitude</th>
                             <th scope="col" >Longitude</th>
-                            <th scope="col"  >Ações</th>
+                            <th scope="col" >Ações</th>
                           </tr>
                         </thead>
                         <tbody  id="tableParadas" style="height: 100px;  overflow-y: auto; overflow-x: hidden; ">
@@ -45,6 +46,13 @@
                                     <label for="rua_da_parada">{{ __('Rua') }}</label>
                                     <input type="text" class="form-control" id="rua_da_parada" name="rua_da_parada" placeholder="Digite o nome da rua">
                                     <span class="rua_da_parada" style="color: red"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="numero_da_parada">{{ __('Número') }}</label>
+                                    <input type="text" class="form-control" id="numero_da_parada" name="numero_da_parada" placeholder="Digite o número da parada">
+                                    <span class="numero_da_parada" style="color: red"></span>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -90,6 +98,13 @@
                                     <label for="editar_rua_da_parada">{{ __('Rua') }}</label>
                                     <input type="text" class="form-control" id="editar_rua_da_parada" name="editar_rua_da_parada" placeholder="Digite o nome da rua">
                                     <span class="editar_rua_da_parada" style="color: red"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="editar_numero_da_parada">{{ __('Número') }}</label>
+                                    <input type="text" class="form-control" id="editar_rua_da_parada" name="editar_numero_da_parada" placeholder="Digite o número da parada">
+                                    <span class="editar_numero_da_parada" style="color: red"></span>
                                 </div>
                             </div>
                             <div class="col-12">

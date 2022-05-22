@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Empresa;
+use App\Models\Cidadeeempresa;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -28,6 +29,7 @@ class EmpresaController extends Controller
     */
     public function salvarEmpresa(Request $request){
         $empresa = Empresa::create(['nome' => $request->nome_empresa]);
+        Cidadeeempresa::create(['cidade_id' => 1, 'empresa_id' => $empresa->id]); //Alterar no futuro para receber qualquer cidade
         $body = ['status'=>$empresa, "empresas" => $this->getAllEmpresas()];
         return $body;
     }

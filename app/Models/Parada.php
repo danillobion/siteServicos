@@ -15,6 +15,7 @@ class Parada extends Model
    */
     protected $fillable = [
         'rua',
+        'numero',
         'latitude',
         'longitude',
     ];

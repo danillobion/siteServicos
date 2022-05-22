@@ -13,7 +13,7 @@ var longitude;
 */
 document.addEventListener("DOMContentLoaded", function() {
     adicionarRegistros(DATA.linhaeparadas);
-    adicionarParadas(DATA.paradas);
+    listarParadas(DATA.paradas);
   });
 
   function adicionarRegistros(dados){
@@ -29,6 +29,20 @@ document.addEventListener("DOMContentLoaded", function() {
         cell3.innerHTML = tipoDropdown(e);
     });
   }
+  function listarParadas(dados){
+    document.getElementById("tableTodasAsParadas").innerHTML = ""; // limpar 
+    var table = document.getElementById("tableTodasAsParadas");
+    dados.map(e=>{
+        var row = table.insertRow(0);
+        row.id = "lista_"+e.id;
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = e.rua;
+        cell2.innerHTML = e.numero;
+        cell3.innerHTML = botaoDeAcoesSelecionar(e);
+    });
+  }
   function adicionarParadas(dados){
     dados.forEach(element => {
         $('#select_parada').append($('<option>', {
@@ -37,6 +51,21 @@ document.addEventListener("DOMContentLoaded", function() {
         }));       
       });
   }
+
+function selecionarParada(dados){
+    let parada_id = dados.getAttribute("parada_id");
+    let parada_rua = dados.getAttribute("parada_rua");
+    let parada_numero = dados.getAttribute("parada_numero");
+    var table = document.getElementById("tableTodasAsParadasSelecionadas");
+    var row = table.insertRow(table.rows.length);
+    row.id = "selecionado_"+parada_id;
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML = parada_rua;
+    cell2.innerHTML = parada_numero;
+    cell3.innerHTML = botaoDeAcoesRemover(parada_id, parada_rua, parada_numero);
+}
 
   function tipoDropdown(dados){
         return `
@@ -50,6 +79,35 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         </div>`;
 }
+
+function botaoDeAcoesSelecionar(dados){
+    return `
+    <button class="btn btn-light btn-sm" type="button" parada_id="${dados.id}" parada_rua="${dados.rua}" parada_numero="${dados.numero}" onclick="selecionarParada(this)">Adicionar</button>`;
+}   
+
+function botaoDeAcoesRemover(id, rua, numero){
+    return `
+    <button class="btn btn-light btn-sm" type="button" parada_id="${id}" parada_rua="${rua}" parada_numero="${numero}" onclick="removerParada(this)" style="color:red">Remover</button>`;
+}
+
+document.getElementById('pesquisarParada').addEventListener('keyup', pesquisaTabela());
+function pesquisaTabela() {
+    var filter, table, tr, td, i;
+    table = document.getElementById("dados");
+    return function() {
+      tr = table.querySelectorAll("tbody tr");
+      filter = this.value.toUpperCase();
+      for (i = 0; i < tr.length; i++) {
+        var match = tr[i].innerHTML.toUpperCase().indexOf(filter) > -1;
+        tr[i].style.display = match ? "" : "none";
+      }
+    }
+  }
+
+function removerParada(dados){
+    document.getElementById("selecionado_"+dados.getAttribute("parada_id")).remove();
+}
+
 
 function atualizarVariaveisGlobais(dados){
     ordem = dados.getAttribute("ordem");
@@ -74,8 +132,6 @@ function limparCampos(){
  * Funcao responsavel por avisar quando o campo tiver errado
  */
 function showAlerta(data){
-    // $("#nome_linha").addClass("is-invalid");
-    // $(".nome_linha").text(data.erros.msg);
     console.log("showAlerta", data);
 }
 function interacao(acao){

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateCidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('linhaeparadas', function (Blueprint $table) {
+        Schema::create('cidades', function (Blueprint $table) {
             $table->id();
-            $table->integer('ordem');
-            $table->integer('linha_id');
-            $table->integer('dia'); //0 dia util, 1 sábado e 2, domingo
-            $table->integer('parada_id');
+            $table->string('nome');
+            $table->string('uf');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('linhaeparadas');
+        Schema::dropIfExists('cidades');
     }
-};
+}

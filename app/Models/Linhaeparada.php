@@ -16,6 +16,7 @@ class Linhaeparada extends Model
     protected $fillable = [
         'ordem',
         'linha_id',
+        'dia',
         'parada_id',
     ];
     
