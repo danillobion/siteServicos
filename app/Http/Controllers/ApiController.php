@@ -96,12 +96,14 @@ class ApiController extends Controller
         $parada_id = $request->parada_id;
         $linhas = [];
         $listaDeLinhas = Linhaeparada::where('parada_id',  $parada_id)->get('linha_id');
+
         foreach ($listaDeLinhas as $key => $value) {
             $linhaSelecionada = Linha::where('id',  $value->linha_id)->get()[0];
+            $infoEmpresa = Empresa::where('id',  $linhaSelecionada->empresa_id)->get()[0];
             //prepara o body
             $body = array(
                 'success' => true,
-                'empresa_nome'  => $linhaSelecionada->nome,
+                'empresa_nome'  => $infoEmpresa->nome,
                 'linha_id'  =>$linhaSelecionada->id,
                 'linha_nome'  => $linhaSelecionada->nome,
                 'linha_numero'  => $linhaSelecionada->numero,
