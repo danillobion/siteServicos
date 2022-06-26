@@ -11,6 +11,10 @@ use App\Models\Linha;
 use App\Models\Parada;
 use App\Models\Horario;
 use App\Models\Linhaeparada;
+use App\Models\Historicodeposicoes;
+use App\Models\Estabelecimento;
+use App\Models\Estabelecimentoeparada;
+use App\Models\Statusdosistemas;
 use Exception;
 
 class ApiController extends Controller
@@ -33,8 +37,8 @@ class ApiController extends Controller
         $listaDeLinhas = [];
         $cidade_id = Cidade::where('id', $request->cidade_id)->get('id')[0]->id;
         $empresas = Cidadeeempresa::where('cidade_id', $cidade_id)->get('empresa_id');
+        $statusDoSistema = Statusdosistemas::get();
 
-        
         foreach ($empresas as $key => $value) {
             $empresa_id = $value->empresa_id;
             //pegar as informações das linhas
@@ -52,6 +56,7 @@ class ApiController extends Controller
                     'linha_numero'  => $value->numero,
                     'linha_tempo_de_espera'  => $value->tempo_de_espera,
                     'linha_valor'  => $value->valor,
+                    'linha_aviso'  => $value->aviso,
                 );
                 //add cada linha + empresa a um array
                 array_push($listaDeLinhas, $dados);
@@ -60,6 +65,7 @@ class ApiController extends Controller
         $body = array(
             'success' => true,
             'dados'  => $listaDeLinhas,
+            'sistema' =>$statusDoSistema,
         );
         echo json_encode($body);
     }
@@ -70,15 +76,27 @@ class ApiController extends Controller
         $linha_id = $request->linha_id;
         $paradas = [];
 
-        $infoLinha = Linha::where('id',  $linha_id)->get()[0];
-        $infoEmpresa = Empresa::where('id',  $infoLinha->empresa_id)->get()[0];
-
-        $listaDeParadas = Linhaeparada::where('linha_id',  $linha_id)->get('parada_id');
+        $listaDeParadas = Linhaeparada::where('linha_id',  $linha_id)->get();
         $horarios = Horario::where('linha_id',  $linha_id)->get();
 
-        foreach ($listaDeParadas as $key => $value) {
-            $paradaSelecionada = Parada::where('id',  $value->parada_id)->get()[0];
-            array_push($paradas,$paradaSelecionada);
+        foreach ($listaDeParadas as $key => $valueParada) {
+            $paradaSelecionada = Parada::where('id',  $valueParada->parada_id)->get()[0];
+            $referencias  = [];
+            $estabelecimentoeparada = Estabelecimentoeparada::where("parada_id", $valueParada->parada_id)->get();
+            foreach ($estabelecimentoeparada as $key => $value) {
+                $estabelecimento = Estabelecimento::where("id", $value->estabelecimento_id)->get();
+                array_push($referencias,$estabelecimento[0]->nome);
+            }
+            $body = array(
+                'id' => $paradaSelecionada->id,
+                'rua'  => $paradaSelecionada->rua,
+                'numero'  => $paradaSelecionada->numero,
+                'latitude'  => $paradaSelecionada->latitude,
+                'longitude'  => $paradaSelecionada->longitude,
+                'sentido'  => $valueParada->sentido,
+                'referencia'  => implode(", ", $referencias),
+            );
+            array_push($paradas,$body);
         }
         
         $body = array(
@@ -95,7 +113,7 @@ class ApiController extends Controller
     public function getTodasAsLinhasDeUmaDeterminadaParada(Request $request){
         $parada_id = $request->parada_id;
         $linhas = [];
-        $listaDeLinhas = Linhaeparada::where('parada_id',  $parada_id)->get('linha_id');
+        $listaDeLinhas = Linhaeparada::where('parada_id',  $parada_id)->distinct()->get('linha_id');
 
         foreach ($listaDeLinhas as $key => $value) {
             $linhaSelecionada = Linha::where('id',  $value->linha_id)->get()[0];
@@ -113,6 +131,40 @@ class ApiController extends Controller
             array_push($linhas,$body);
         }
         echo json_encode($linhas);
+    }
+    /*
+    * Funcao responsavel por receber a posicao do usuario
+    */
+    public function setPosicao(Request $request){
+        try {
+            $body = array(
+                'usuario_id' => $request->usuario_id,
+                'linha_id' => $request->linha_id,
+                'latitude'  =>$request->latitude,
+                'longitude'  =>$request->longitude,
+                'accuracy'  => $request->accuracy,
+                'timestamp'  => date('d/m/Y H:i:s', $request->timestamp),
+                'tipo'  => $request->tipo,
+            );
+            $resultado = Historicodeposicoes::create($body);
+            if(isset($resultado)){
+                return response(array(
+                    'success' => true,
+                    'acao' => "1"
+                ), 200);
+            }else{
+                return response(array(
+                    'success' => false,
+                    'acao' => "0"
+                ), 400);
+            }
+        } catch (Exception $err){
+            return response(array(
+                'success' => false,
+                'message' => $err->getMessage(),
+                'acao' => "4"
+            ), 400);
+        }
     }
 
     public function getAll(ApiRequest $request){

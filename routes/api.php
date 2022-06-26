@@ -38,4 +38,6 @@ Route::post('/linhas', [ApiController::class, 'getTodasAsLinhas']);
 Route::post('/info/linhas', [ApiController::class, 'getInfoLinha']);
 //Outras linhas
 Route::post('/linha/paradas', [ApiController::class, 'getTodasAsLinhasDeUmaDeterminadaParada']);
+//Enviar posicao
+Route::post('/enviar/posicao', [ApiController::class, 'setPosicao']);
 

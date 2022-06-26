@@ -25,6 +25,7 @@ class LinhaController extends Controller
             'numero' => $request['numero_da_linha'],
             'tempo_de_espera' => $request['tempo_de_espera_da_linha'],
             'valor' => $request['valor_da_linha'],
+            'aviso' => $request['aviso_linha'],
         ]);
         $body = ['status'=>$linha, "linhas" => $this->getAllLinhas($request['empresa_id'])];
         return $body;
@@ -46,6 +47,7 @@ class LinhaController extends Controller
             'numero' => $request['editar_numero_da_linha'],
             'tempo_de_espera' => $request['editar_tempo_de_espera_da_linha'],
             'valor' => $request['editar_valor_da_linha'],
+            'aviso' => $request['editar_aviso_linha'],
         ]);
         $body = ['status'=>$linha, "linhas" => $this->getAllLinhas($request['empresa_id'])];
         return $body;

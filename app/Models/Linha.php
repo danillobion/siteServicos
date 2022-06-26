@@ -19,7 +19,8 @@ class Linha extends Model
         'numero',
         'tempo_de_espera',
         'valor',
-        'cidade_id'
+        'cidade_id',
+        'aviso',
     ];
 
     public function paradas() {
@@ -37,6 +38,6 @@ class Linha extends Model
 
     public function getValorAttribute($date)
     {
-        return "R$ {$date}";
+        return $date;
     }
 }

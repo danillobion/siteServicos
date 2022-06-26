@@ -7,7 +7,11 @@ function salvarListaDeParadas(){
     let tr = table.querySelectorAll("tbody tr");
     let listaParadasSelecionadas = [];
     for (i = 0; i < tr.length; i++) {
-        listaParadasSelecionadas.push(parseInt(tr[i].id.replaceAll("selecionado_","")));
+        let rota = {
+            "parada_id": parseInt(tr[i].id.replaceAll("selecionado_","")),
+            "sentido": $("#sentido_"+tr[i].id.replaceAll("selecionado_","")).val(),
+          }
+          listaParadasSelecionadas.push(rota);
     }
     salvar(parseInt(DATA.linha_id), $('meta[name="csrf-token"]').attr('content'), listaParadasSelecionadas);
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateStatusdosistemasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('linhas', function (Blueprint $table) {
+        Schema::create('Statusdosistemas', function (Blueprint $table) {
             $table->id();
-            $table->integer('empresa_id');
-            $table->string('nome');
-            $table->string('numero');
-            $table->string('tempo_de_espera');
-            $table->string('valor');
-            $table->string('aviso')->nullable();
+            $table->integer('versao');
+            $table->string('descricao');
+            $table->string('tipo'); //tipo de atualizacao (alta, media, baixa)
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('linhas');
+        Schema::dropIfExists('Statusdosistemas');
     }
-};
+}

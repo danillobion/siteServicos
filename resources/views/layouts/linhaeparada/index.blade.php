@@ -13,9 +13,10 @@
                     <table class="table table-hover  mb-0">
                         <thead>
                           <tr>
-                            <th scope="col" >Ordem</th>
+                            <th scope="col">Ordem</th>
                             <th scope="col" style="width: 100%">Parada</th>
-                            <th scope="col"  >Ações</th>
+                            <th scope="col"  style="width: 100%">Sentido</th>
+                            <th scope="col">Ações</th>
                           </tr>
                         </thead>
                         <tbody  id="tableLinhaeparadas" style="height: 100px;  overflow-y: auto; overflow-x: hidden; ">
@@ -27,7 +28,7 @@
         
         <!-- Modal adicionar-->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">{{ __('Selecionar parada') }}</h5>
@@ -63,8 +64,9 @@
                                 <table class="table table-hover  mb-0"  id="listaDeParadasSelecionadas">
                                     <thead>
                                       <tr>
-                                        <th scope="col"  style="width: 100%">Parada</th>
+                                        <th scope="col"  style="width: 50%">Parada</th>
                                         <th scope="col" >Número</th>
+                                        <th scope="col"  style="width: 50%">Sentido</th>
                                         <th scope="col"  >Ações</th>
                                       </tr>
                                     </thead>
@@ -84,7 +86,7 @@
             </div>
         </div>
         <!-- Modal editar-->
-        <div class="modal fade" id="modalAtualizarLinhaeParada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        {{-- <div class="modal fade" id="modalAtualizarLinhaeParada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -119,7 +121,7 @@
                 </div>
             </div>
             </div>
-        </div>
+        </div> --}}
 </div>
 </div>
 <script>

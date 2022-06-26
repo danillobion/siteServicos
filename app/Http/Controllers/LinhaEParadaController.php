@@ -31,6 +31,7 @@ class LinhaEParadaController extends Controller
                     "rua" => $parada[0]->rua,
                     "latitude" => $parada[0]->latitude,
                     "longitude" => $parada[0]->longitude,
+                    "sentido" => $item->sentido,
                 );
             array_push($arrayLinhaParadas, $arrayEstrutura);
         } 
@@ -42,19 +43,21 @@ class LinhaEParadaController extends Controller
     */
     public function salvarLinhaeParada(Request $request){
         $cont = 0;
-        Linhaeparada::where('linha_id', $request->linha_id)->delete();
+        Linhaeparada::where('linha_id', $request->linha_id)->delete(); //apago a rota atual ja selecionada para inserir uma nova rota
 
         foreach ($_REQUEST['lista'] as $key => $value) {
-            $linhaeparadas = Linhaeparada::create([
+                Linhaeparada::create([
                     'ordem' =>$cont+1, 
                     'linha_id' =>intval($request->linha_id), 
                     'dia' => 0,
-                    'parada_id' =>intval($value)
+                    'sentido' => $value['sentido'],
+                    'parada_id' =>intval($value['parada_id']),
                 ]);
                 $cont = $cont+1;
         }
         $body = ['status'=>1,"linhaeparadas" =>$this->getAllLinhaParadas($request['linha_id'])];
         return $body;
+        // echo json_encode($_REQUEST['lista'][0]['sentido']);
     }
     /*
     * Funcao responsavel por remover uma parada que esta vinculada a uma linha

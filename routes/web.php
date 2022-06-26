@@ -7,6 +7,8 @@ use App\Http\Controllers\LinhaController;
 use App\Http\Controllers\ParadaController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\LinhaEParadaController;
+use App\Http\Controllers\EstabelecimentoController;
+use App\Http\Controllers\EstabelecimentoEParadaController;
 // use App\Http\Controllers\ApiController;
 
 /*
@@ -35,6 +37,16 @@ Route::group(['middleware' => 'type'], function () {
     Route::post('/home/empresa/salvar', [EmpresaController::class, 'salvarEmpresa'])->name('empresa/salvar');
     Route::post('/home/empresa/atualizar', [EmpresaController::class, 'atualizarEmpresa'])->name('empresa/atualizar');
     Route::post('/home/empresa/deletar', [EmpresaController::class, 'deletarEmpresa'])->name('empresa/deletar');
+    //estabelecimento
+    Route::get('/home/estabelecimento', [EstabelecimentoController::class, 'index'])->name('estabelecimento/index');
+    Route::post('/home/estabelecimento/salvar', [EstabelecimentoController::class, 'salvarEstabelecimento'])->name('estabelecimento/salvar');
+    Route::post('/home/estabelecimento/editar', [EstabelecimentoController::class, 'editarEstabelecimento'])->name('estabelecimento/editar');
+    Route::post('/home/estabelecimento/atualizar', [EstabelecimentoController::class, 'atualizarEstabelecimento'])->name('estabelecimento/atualizar');
+    Route::post('/home/estabelecimento/deletar', [EstabelecimentoController::class, 'deletarEstabelecimento'])->name('estabelecimento/deletar');
+    //estabelecimentos e paradas
+    Route::get('/home/estabelecimento/{estabelecimento_id}/paradas', [EstabelecimentoEParadaController::class, 'index'])->name('estabelecimento/paradas/index');
+    Route::post('/home/estabelecimento/paradas/salvar', [EstabelecimentoEParadaController::class, 'salvarParada'])->name('estabelecimento/paradas/salvar');
+    Route::post('/home/estabelecimento/paradas/deletar', [EstabelecimentoEParadaController::class, 'deletarParada'])->name('estabelecimento/paradas/deletar');
     //linha
     Route::get('/home/linha/{empresa_id}', [LinhaController::class, 'index'])->name('linha/index');
     Route::post('/home/linha/salvar', [LinhaController::class, 'salvarLinha'])->name('linha/salvar');
