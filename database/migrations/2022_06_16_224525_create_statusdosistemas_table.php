@@ -13,7 +13,7 @@ class CreateStatusdosistemasTable extends Migration
      */
     public function up()
     {
-        Schema::create('Statusdosistemas', function (Blueprint $table) {
+        Schema::create('statusdosistemas', function (Blueprint $table) {
             $table->id();
             $table->integer('versao');
             $table->string('descricao');
@@ -30,6 +30,6 @@ class CreateStatusdosistemasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Statusdosistemas');
+        Schema::dropIfExists('statusdosistemas');
     }
 }
