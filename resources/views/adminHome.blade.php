@@ -9,13 +9,17 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12" style="margin-bottom: 1rem">
+                        <div class="col-12" style="margin-bottom: 1rem; color:#909090">
                             <label for="paradas">Paradas</label>
                             <a type="button" class="btn btn-primary btn-sm" href="home/parada" style="width:100%; color:white">{{__("Paradas")}}</a>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12" style="margin-bottom: 1rem; color:#909090">
                             <label for="paradas">Empresas</label>
                             <a type="button" class="btn btn-primary btn-sm" href="home/empresa" style="width:100%; color:white">{{__("Empresas")}}</a>
+                        </div>
+                        <div class="col-12" style="margin-bottom: 1rem; color:#909090">
+                            <label for="paradas">Estabelecimentos</label>
+                            <a type="button" class="btn btn-primary btn-sm" href="home/estabelecimento" style="width:100%; color:white">{{__("Estabelecimentos")}}</a>
                         </div>
                     </div>
                 </div>

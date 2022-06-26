@@ -18,6 +18,7 @@ function editarLinha(linha_id){
             $("#editar_numero_da_linha").val(resultado[0].numero);
             $("#editar_tempo_de_espera_da_linha").val(resultado[0].tempo_de_espera);
             $("#editar_valor_da_linha").val(resultado[0].valor);
+            $("#editar_aviso_linha").val(resultado[0].aviso);
         }
     });
     // $("#editar_nome_empresa").val(empresa_nome);

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('linhaeparadas', function (Blueprint $table) {
             $table->id();
             $table->integer('ordem');
+            $table->integer('sentido'); //0 ida, 1 volta, 2 partida, 3 km morto
             $table->integer('linha_id');
             $table->integer('dia'); //0 dia util, 1 sábado e 2, domingo
             $table->integer('parada_id');

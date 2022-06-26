@@ -69,6 +69,13 @@
                                     <span class="valor_da_linha" style="color: red"></span>
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="aviso_linha">{{ __('Aviso') }}</label>
+                                    <input type="text" class="form-control" id="aviso_linha" name="aviso_linha" placeholder="Insira um aviso a respeito da linha">
+                                    <span class="aviso_linha" style="color: red"></span>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -119,6 +126,13 @@
                                     <label for="editar_valor_da_linha">{{ __('Valor da linha') }}</label>
                                     <input type="text" class="form-control" id="editar_valor_da_linha" name="editar_valor_da_linha" placeholder="Digite o valor da passagem">
                                     <span class="editar_valor_da_linha" style="color: red"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="editar_aviso_linha">{{ __('Aviso') }}</label>
+                                    <input type="text" class="form-control" id="editar_aviso_linha" name="editar_aviso_linha" placeholder="Insira um aviso a respeito da linha">
+                                    <span class="editar_aviso_linha" style="color: red"></span>
                                 </div>
                             </div>
                         </div>
