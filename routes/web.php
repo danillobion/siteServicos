@@ -22,12 +22,16 @@ use App\Http\Controllers\EstabelecimentoEParadaController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return view('publico/home');
+// });
+
+Route::get('/', [App\Http\Controllers\PublicoHomeController::class, 'index']);
+Route::get('/parada/{linha_id}', [App\Http\Controllers\PublicoDetalheDaLinhaController::class, 'index']);
+Route::get('/politicadeprivacidade',  function () { return view('publico/politicaDePrivacidade'); });
 
 Auth::routes();
-
 //aberto
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //acesso restrito a usuarios logados

@@ -1,0 +1,27 @@
+.nav-menu{
+    background-color:#262628 !important;
+}
+.style-body{
+    background-color: #343434 !important;
+}
+.style-font-padrao{
+    color:white !important;
+}
+.style-font-1{
+    color:#FFC700 !important;
+    font-weight:500;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.style-font-2{
+    color:#C4C4C4 !important;
+    text-align: justify;
+}
+.style-lista-component{
+    background-color: #4a4a4a;
+    color:white;
+}
+.modal-color{
+}
+.modal-color:hover{
+    background-color:#3a3a3c !important;
+}
